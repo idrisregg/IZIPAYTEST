@@ -1,0 +1,52 @@
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.aps
+*.cache
+*.log
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET
+wwwroot/*.min.js
+wwwroot/*.min.css
+App_Data/
+
+# OS / tools
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ReSharper / Rider
+_ReSharper*/
+.idea/
+*.DotSettings.user
+
+# Test results
+TestResults/
+*.trx
+
+# Local configs
+appsettings.Development.json
+appsettings
+secrets.json
