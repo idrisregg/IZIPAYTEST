@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IZIPay</title>
+  </head>
+  <body>
+    <main>
+      <h1>Choose a product</h1>
+      <p id="checkout-error" role="alert"></p>
+
+      <section>
+        <button
+          type="button"
+          onclick="
+            openCheckout(
+              event,
+              'http://localhost:5208/izipay/chargily/checkout/1',
+            )
+          "
+        >
+          Starter - 1000 DA
+        </button>
+      </section>
+
+      <section>
+        <button
+          type="button"
+          onclick="
+            openCheckout(
+              event,
+              'http://localhost:5208/izipay/chargily/checkout/2',
+            )
+          "
+        >
+          Pro - 2500 DA
+        </button>
+      </section>
+
+      <section>
+        <button
+          type="button"
+          onclick="
+            openCheckout(
+              event,
+              'http://localhost:5208/izipay/chargily/checkout/3',
+            )
+          "
+        >
+          Business - 5000 DA
+        </button>
+      </section>
+    </main>
+
+    <script>
+      const chargilyCheckoutBaseUrl = "https://pay.chargily.dz/test/checkouts/";
+
+      async function openCheckout(event, endpoint) {
+        event.preventDefault();
+        const errorElement = document.getElementById("checkout-error");
+        errorElement.textContent = "";
+
+        try {
+          const response = await fetch(endpoint, { method: "POST" });
+          const result = await response.json();
+
+          if (!response.ok || !result.checkout_id) {
+            throw new Error(
+              result.detail ||
+                result.message ||
+                "Checkout could not be created.",
+            );
+          }
+
+          const checkoutUrl =
+            chargilyCheckoutBaseUrl +
+            encodeURIComponent(result.checkout_id) +
+            "/pay";
+
+          window.open(checkoutUrl)
+        } catch (error) {
+          errorElement.textContent =
+            error.message || "Checkout could not be created.";
+        }
+      }
+    </script>
+  </body>
+</html>
