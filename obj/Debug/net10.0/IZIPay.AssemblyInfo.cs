@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IZIPay")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+756a9b3ca704ca2dac5784b16e580f252c5dab3c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b38321cfab6edf96edadb5cec035995eb96b90b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("IZIPay")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IZIPay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
