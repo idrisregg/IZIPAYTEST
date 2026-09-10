@@ -1,89 +1,94 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>IZIPay</title>
-  </head>
-  <body>
+</head>
+<body>
     <main>
-      <h1>Choose a product</h1>
-      <p id="checkout-error" role="alert"></p>
+        <h1>Choose a product</h1>
+        <p id="checkout-error" role="alert"></p>
 
-      <section>
-        <button
-          type="button"
-          onclick="
-            openCheckout(
-              event,
-              'http://localhost:5208/izipay/chargily/checkout/1',
-            )
-          "
-        >
-          Starter - 1000 DA
-        </button>
-      </section>
+        <section>
+            <h2>Starter - 1000 DA</h2>
+            <select data-provider="1">
+                <option value="">Choose payment method</option>
+                <option value="chargily">Chargily</option>
+                <option value="slickpay">SlickPay</option>
+            </select>
+            <button type="button" data-product="1">Continue to payment</button>
+        </section>
 
-      <section>
-        <button
-          type="button"
-          onclick="
-            openCheckout(
-              event,
-              'http://localhost:5208/izipay/chargily/checkout/2',
-            )
-          "
-        >
-          Pro - 2500 DA
-        </button>
-      </section>
+        <section>
+            <h2>Pro - 2500 DA</h2>
+            <select data-provider="2">
+                <option value="">Choose payment method</option>
+                <option value="chargily">Chargily</option>
+                <option value="slickpay">SlickPay</option>
+            </select>
+            <button type="button" data-product="2">Continue to payment</button>
+        </section>
 
-      <section>
-        <button
-          type="button"
-          onclick="
-            openCheckout(
-              event,
-              'http://localhost:5208/izipay/chargily/checkout/3',
-            )
-          "
-        >
-          Business - 5000 DA
-        </button>
-      </section>
+        <section>
+            <h2>Business - 5000 DA</h2>
+            <select data-provider="3">
+                <option value="">Choose payment method</option>
+                <option value="chargily">Chargily</option>
+                <option value="slickpay">SlickPay</option>
+            </select>
+            <button type="button" data-product="3">Continue to payment</button>
+        </section>
     </main>
 
     <script>
-      const chargilyCheckoutBaseUrl = "https://pay.chargily.dz/test/checkouts/";
+        const chargilyCheckoutBaseUrl = "https://pay.chargily.dz/test/checkouts/";
 
-      async function openCheckout(event, endpoint) {
-        event.preventDefault();
-        const errorElement = document.getElementById("checkout-error");
-        errorElement.textContent = "";
+        async function openCheckout(productId, provider) {
+            const errorElement = document.getElementById("checkout-error");
+            errorElement.textContent = "";
 
-        try {
-          const response = await fetch(endpoint, { method: "POST" });
-          const result = await response.json();
+            if (!provider) {
+                errorElement.textContent = "Choose a payment method first."
+                setTimeout(() => {
+                    errorElement.textContent = ''
+                }, 3000)
+                return
+            }
 
-          if (!response.ok || !result.checkout_id) {
-            throw new Error(
-              result.detail ||
-                result.message ||
-                "Checkout could not be created.",
-            );
-          }
+            const endpoint = `/izipay/${provider}/checkout/${productId}`;
 
-          const checkoutUrl =
-            chargilyCheckoutBaseUrl +
-            encodeURIComponent(result.checkout_id) +
-            "/pay";
+            try {
+                const response = await fetch(endpoint, { method: "POST" });
+                const result = await response.json();
 
-          window.open(checkoutUrl)
-        } catch (error) {
-          errorElement.textContent =
-            error.message || "Checkout could not be created.";
+                if (!response.ok || (!result.checkout_id && !result.url)) {
+                    throw new Error(
+                        result.detail ||
+                        result.message ||
+                        "Checkout could not be created.",
+                    );
+                }
+
+                const checkoutUrl = result.url ||
+                    chargilyCheckoutBaseUrl + encodeURIComponent(result.checkout_id) + "/pay";
+
+                window.open(checkoutUrl);
+            } catch (error) {
+                errorElement.textContent =
+                    error.message || "Checkout could not be created.";
+            }
         }
-      }
+
+        document.querySelectorAll("[data-product]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const productId = button.dataset.product;
+                const provider = document.querySelector(
+                    `[data-provider="${productId}"]`,
+                ).value;
+                openCheckout(productId, provider);
+            });
+        });
     </script>
-  </body>
+</body>
 </html>

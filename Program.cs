@@ -1,24 +1,50 @@
 using IZIPay.Data;
-using IZIPay;
-using Microsoft.EntityFrameworkCore;
+using IZIPay.Services;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using IZIPay.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
-builder.Services.AddCors(options => options.AddPolicy("CheckoutFrontend", policy =>
+builder.Services.AddCors(options => options.AddPolicy("Front", policy =>
 {
-    policy.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500")
+    policy
         .AllowAnyHeader()
-        .AllowAnyMethod();
+        .AllowAnyMethod()
+        .AllowAnyOrigin();
 }));
+var connectionString = builder.Configuration.GetConnectionString("IziPay")
+    ?? "Data Source=izipay.db";
+var sqliteConnection = new SqliteConnectionStringBuilder(connectionString);
+if (!Path.IsPathRooted(sqliteConnection.DataSource))
+{
+    sqliteConnection.DataSource = Path.Combine(
+        builder.Environment.ContentRootPath,
+        sqliteConnection.DataSource);
+}
+
 builder.Services.AddDbContext<IziPayDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("IziPay") ?? "Data Source=izipay.db"));
+    options.UseSqlite(sqliteConnection.ToString()));
 builder.Services.Configure<GatewayOptions>(builder.Configuration.GetSection(GatewayOptions.SectionName));
 builder.Services.AddHttpClient("Gateway");
-builder.Services.AddScoped<PaymentService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddOpenApi();
+
+builder.Services.AddRateLimiter(s =>
+{
+    s.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    s.AddFixedWindowLimiter(policyName: "Fixed", op =>
+    {
+        op.PermitLimit = 100;
+        op.Window = TimeSpan.FromMinutes(1);
+        op.QueueLimit = 0;
+        op.AutoReplenishment = true;
+    });
+});
 
 var app = builder.Build();
 
@@ -39,10 +65,10 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
+app.UseRateLimiter();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseCors("CheckoutFrontend");
+app.UseCors("Front");
 
 if (!app.Environment.IsDevelopment())
 {

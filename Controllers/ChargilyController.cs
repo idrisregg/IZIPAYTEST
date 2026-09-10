@@ -2,29 +2,34 @@ using Microsoft.AspNetCore.Mvc;
 using IZIPay.Models;
 using System.Security.Cryptography;
 using System.Text.Json;
+using Microsoft.AspNetCore.RateLimiting;
+using IZIPay.Services;
+using IZIPay.Repos;
 
 namespace IZIPay.Controllers;
 
 [ApiController]
 [Route("izipay/chargily")]
-public sealed class ChargilyController(
-    PaymentService paymentService,
-    IConfiguration configuration) : ControllerBase
+[EnableRateLimiting("Fixed")]
+public sealed class ChargilyController(IPaymentService paymentService, IConfiguration configuration) : ControllerBase
 {
+    private readonly IPaymentService _paymentService = paymentService;
+
     [HttpPost("checkout/{productId:int}")]
     public async Task<IActionResult> Checkout(int productId, CancellationToken cancellationToken)
     {
         var product = ProductCatalog.Find(productId);
         if (product is null)
+
         {
             return NotFound(new { message = $"Product {productId} was not found." });
         }
 
-        var payment = await paymentService.CreatePendingPaymentAsync(product, cancellationToken);
+        var payment = await _paymentService.CreatePendingPaymentAsync(product, "chargily", cancellationToken);
 
         try
         {
-            var checkout = await paymentService.CreateGatewayCheckoutAsync(
+            var checkout = await _paymentService.CreateGatewayCheckoutAsync(
                 "chargily", payment, cancellationToken);
 
             if (string.IsNullOrWhiteSpace(checkout.CheckoutId))
@@ -32,7 +37,7 @@ public sealed class ChargilyController(
                 return Problem("Chargily did not return a checkout ID.", statusCode: 502);
             }
 
-            await paymentService.SetCheckoutIdAsync(payment, checkout.CheckoutId, cancellationToken);
+            await _paymentService.SetCheckoutIdAsync(payment, checkout.CheckoutId, cancellationToken);
             return Ok(new { checkout_id = checkout.CheckoutId });
         }
         catch (HttpRequestException)
@@ -52,6 +57,7 @@ public sealed class ChargilyController(
     }
 
     [HttpPost("webhook")]
+    [DisableRateLimiting]
     public async Task<IActionResult> Webhook(CancellationToken cancellationToken)
     {
         var payload = await new StreamReader(Request.Body).ReadToEndAsync(cancellationToken);
@@ -61,7 +67,7 @@ public sealed class ChargilyController(
             return BadRequest(new { message = "Missing Chargily signature." });
         }
 
-        if (!VerifySignature(payload, signature, configuration["Gateway:Chargily:ApiKey"]))
+        if (!VerifySignature(payload, signature, configuration["Gateway:Chargily:SecretKey"]))
         {
             return Forbid();
         }
@@ -85,10 +91,24 @@ public sealed class ChargilyController(
             return BadRequest(new { message = "Webhook checkout ID is missing." });
         }
 
-        var updated = await paymentService.UpdatePaymentByCheckoutIdAsync(
+        var checkoutStatus = ReadString(checkout, "status");
+
+        string stat = "";
+
+        if (eventType == "checkout.paid" && checkoutStatus == "paid")
+        {
+            stat = "Paid";
+        }
+        if (eventType == "checkout.failed" && checkoutStatus == "failed")
+        {
+            stat = "Failed";
+        }
+
+        var updated = await _paymentService.UpdatePaymentByCheckoutIdAsync(
             checkoutId,
-            eventType == "checkout.paid" ? "paid" : "failed",
+            stat,
             cancellationToken);
+
         if (!updated)
         {
             return NotFound();
@@ -96,7 +116,6 @@ public sealed class ChargilyController(
 
         return Ok();
     }
-
     private static bool VerifySignature(string payload, string signature, string? secret)
     {
         if (string.IsNullOrWhiteSpace(secret) ||
