@@ -32,7 +32,6 @@ builder.Services.Configure<GatewayOptions>(builder.Configuration.GetSection(Gate
 builder.Services.AddHttpClient("Gateway");
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddOpenApi();
-builder.Services.AddCoreAdmin();
 
 builder.Services.AddRateLimiter(s =>
 {
@@ -68,7 +67,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseRouting();
 app.UseRateLimiter();
-app.UseCoreAdminCustomUrl("adminn");
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors("Front");

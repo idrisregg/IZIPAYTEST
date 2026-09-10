@@ -3,7 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Informatics\\Desktop\\IZIPay\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Informatics\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.24.1-preview.1\\build\\Container.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\controllers\\chargilycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -12,14 +13,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\repos\\ipaymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:repos\\ipaymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,32 +31,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Container.targets",
-              "DocumentMoniker": "C:\\Users\\Informatics\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.24.1-preview.1\\build\\Container.targets",
-              "RelativeDocumentMoniker": "..\\..\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.24.1-preview.1\\build\\Container.targets",
-              "ToolTip": "C:\\Users\\Informatics\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.24.1-preview.1\\build\\Container.targets",
-              "RelativeToolTip": "..\\..\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.24.1-preview.1\\build\\Container.targets",
-              "ViewState": "AgIAANcAAAAAAAAAAAApwOQAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-09-10T14:16:44.041Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IPaymentService.cs",
-              "DocumentMoniker": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Repos\\IPaymentService.cs",
-              "RelativeDocumentMoniker": "Repos\\IPaymentService.cs",
-              "ToolTip": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Repos\\IPaymentService.cs",
-              "RelativeToolTip": "Repos\\IPaymentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T11:34:03.052Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -93,13 +60,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAAC4AAAADAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-09T15:13:24.778Z",
               "EditorCaption": ""
