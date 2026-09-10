@@ -1,7 +1,6 @@
 using IZIPay.Data;
 using IZIPay.Services;
 using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using IZIPay.Repos;
 
@@ -16,18 +15,14 @@ builder.Services.AddCors(options => options.AddPolicy("Front", policy =>
         .AllowAnyMethod()
         .AllowAnyOrigin();
 }));
-var connectionString = builder.Configuration.GetConnectionString("IziPay")
-    ?? "Data Source=izipay.db";
-var sqliteConnection = new SqliteConnectionStringBuilder(connectionString);
-if (!Path.IsPathRooted(sqliteConnection.DataSource))
-{
-    sqliteConnection.DataSource = Path.Combine(
-        builder.Environment.ContentRootPath,
-        sqliteConnection.DataSource);
-}
+var connectionString = builder.Configuration.GetConnectionString("IziPay");
+
+
 
 builder.Services.AddDbContext<IziPayDbContext>(options =>
-    options.UseSqlite(sqliteConnection.ToString()));
+    options.UseNpgsql(connectionString));
+
+
 builder.Services.Configure<GatewayOptions>(builder.Configuration.GetSection(GatewayOptions.SectionName));
 builder.Services.AddHttpClient("Gateway");
 builder.Services.AddScoped<IPaymentService, PaymentService>();
@@ -47,19 +42,6 @@ builder.Services.AddRateLimiter(s =>
 });
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<IziPayDbContext>();
-    db.Database.EnsureCreated();
-    try
-    {
-        db.Database.ExecuteSqlRaw("ALTER TABLE izipay ADD COLUMN checkout_id TEXT");
-    }
-    catch (SqliteException)
-    {
-    }
-}
 
 if (app.Environment.IsDevelopment())
 {

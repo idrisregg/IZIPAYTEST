@@ -118,21 +118,6 @@ public sealed class ChargilyController(IPaymentService paymentService, IConfigur
     }
 
 
-    [HttpGet("db")]
-    public IActionResult DownloadDatabase()
-    {
-        var rootPath = AppContext.BaseDirectory;
-        var filePath = Path.Combine(rootPath, "izipay.db");
-
-        if (!System.IO.File.Exists(filePath))
-            return NotFound($"Database file not found at path: {filePath}");
-
-        var fileBytes = System.IO.File.ReadAllBytes(filePath);
-        return File(fileBytes, "application/x-sqlite3", "izipay_backup.db");
-    }
-
-
-
     private static bool VerifySignature(string payload, string signature, string? secret)
     {
         if (string.IsNullOrWhiteSpace(secret) ||

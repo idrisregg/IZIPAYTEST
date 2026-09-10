@@ -48,6 +48,5 @@ TestResults/
 
 # Local configs
 appsettings.Development.json
-appsettings
+appsettings.json
 secrets.json
-!app.db

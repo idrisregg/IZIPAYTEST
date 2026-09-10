@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|c:\\users\\informatics\\desktop\\izipay\\controllers\\chargilycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3238FE52-8B9B-B390-E148-D9A070417F7D}|IZIPay.csproj|solutionrelative:controllers\\chargilycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,8 +30,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Informatics\\Desktop\\IZIPay\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\Informatics\\Desktop\\IZIPay\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-09-10T15:02:50.167Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
@@ -35,6 +60,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Informatics\\Desktop\\IZIPay\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Informatics\\Desktop\\IZIPay\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-09-10T15:02:13.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "PaymentService.cs",
               "DocumentMoniker": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Services\\PaymentService.cs",
               "RelativeDocumentMoniker": "Services\\PaymentService.cs",
@@ -47,13 +85,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ChargilyController.cs",
               "DocumentMoniker": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Controllers\\ChargilyController.cs",
               "RelativeDocumentMoniker": "Controllers\\ChargilyController.cs",
               "ToolTip": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Controllers\\ChargilyController.cs",
               "RelativeToolTip": "Controllers\\ChargilyController.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAcwGUAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAQwHYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-10T10:41:49.87Z",
               "EditorCaption": ""
@@ -66,7 +104,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Informatics\\Desktop\\IZIPay\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-09T15:13:24.778Z",
               "EditorCaption": ""
