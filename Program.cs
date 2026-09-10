@@ -10,10 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddCors(options => options.AddPolicy("Front", policy =>
 {
-    policy
+    policy.WithOrigins("https://izipaytest.onrender.com")
         .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin();
+        .AllowAnyMethod();
 }));
 var connectionString = builder.Configuration.GetConnectionString("IziPay");
 if (string.IsNullOrWhiteSpace(connectionString))
