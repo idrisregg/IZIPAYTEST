@@ -16,6 +16,10 @@ builder.Services.AddCors(options => options.AddPolicy("Front", policy =>
         .AllowAnyOrigin();
 }));
 var connectionString = builder.Configuration.GetConnectionString("IziPay");
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("Connection string 'IziPay' is not configured.");
+}
 
 
 
@@ -42,6 +46,12 @@ builder.Services.AddRateLimiter(s =>
 });
 
 var app = builder.Build();
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<IziPayDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {
