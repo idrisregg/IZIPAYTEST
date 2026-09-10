@@ -50,3 +50,4 @@ TestResults/
 appsettings.Development.json
 appsettings
 secrets.json
+!app.db
