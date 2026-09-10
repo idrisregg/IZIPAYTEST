@@ -66,6 +66,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+app.UseRouting();
 app.UseRateLimiter();
 app.UseCoreAdminCustomUrl("adminn");
 app.UseDefaultFiles();
