@@ -2,6 +2,28 @@
   "version": 4,
   "targets": {
     "net10.0": {
+      "CoreAdmin/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.1",
+          "NonFactors.Grid.Core.Mvc6": "8.0.0"
+        },
+        "compile": {
+          "lib/net10.0/DotNetEd.CoreAdmin.dll": {}
+        },
+        "runtime": {
+          "lib/net10.0/DotNetEd.CoreAdmin.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ],
+        "build": {
+          "buildTransitive/CoreAdmin.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/CoreAdmin.props": {}
+        }
+      },
       "Microsoft.AspNetCore.OpenApi/10.0.11": {
         "type": "package",
         "dependencies": {
@@ -162,6 +184,18 @@
           "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets": {}
         }
       },
+      "NonFactors.Grid.Core.Mvc6/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Mvc.Grid.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Mvc.Grid.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.12": {
         "type": "package",
         "dependencies": {
@@ -301,6 +335,41 @@
     }
   },
   "libraries": {
+    "CoreAdmin/4.0.0": {
+      "sha512": "zEurNq3Mnafc+BRCeao5zuGAdnd+roDnd425XzljqMLPRqymAHht4Tistte3s6IkCPHu2odV4B2vkrHCDNvscw==",
+      "type": "package",
+      "path": "coreadmin/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/CoreAdmin.props",
+        "build/Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/CoreAdmin.props",
+        "buildTransitive/CoreAdmin.props",
+        "coreadmin.4.0.0.nupkg.sha512",
+        "coreadmin.nuspec",
+        "lib/net10.0/DotNetEd.CoreAdmin.dll",
+        "staticwebassets/css/bootstrap-grid.min.css",
+        "staticwebassets/css/bootstrap-reboot.min.css",
+        "staticwebassets/css/bootstrap.min.css",
+        "staticwebassets/css/easymde/easymde-dark.css",
+        "staticwebassets/css/easymde/easymde.css",
+        "staticwebassets/css/fonts/bootstrap-icons.woff",
+        "staticwebassets/css/fonts/bootstrap-icons.woff2",
+        "staticwebassets/css/mvc-grid/fonts/grid-glyphs.woff",
+        "staticwebassets/css/mvc-grid/mvc-grid-dark.css",
+        "staticwebassets/css/mvc-grid/mvc-grid.css",
+        "staticwebassets/css/style.css",
+        "staticwebassets/js/aspnet-validation.min.js",
+        "staticwebassets/js/bootstrap.bundle.min.js",
+        "staticwebassets/js/bootstrap.min.js",
+        "staticwebassets/js/color-modes.js",
+        "staticwebassets/js/easymde/easymde.min.js",
+        "staticwebassets/js/mvc-grid/mvc-grid.js",
+        "staticwebassets/js/navbar.js"
+      ]
+    },
     "Microsoft.AspNetCore.OpenApi/10.0.11": {
       "sha512": "R/1EATnPLU+gRfB6lwVkMcymmyAY5ppBBdRN/5lhNEiT3xP1sWccuSFkU/f1lQvN/WgRq5Vn8AhCdE3fqgsL/w==",
       "type": "package",
@@ -552,6 +621,18 @@
         "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll"
       ]
     },
+    "NonFactors.Grid.Core.Mvc6/8.0.0": {
+      "sha512": "8+H37DQw+EPOKNCO/fNP34L9cdSqYsIrGn+MhgBexgmHHM20EoFuBsrd9F0Jp0unGE2LvuBYO0wbCMU5J+Iw5A==",
+      "type": "package",
+      "path": "nonfactors.grid.core.mvc6/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/Mvc.Grid.Core.dll",
+        "nonfactors.grid.core.mvc6.8.0.0.nupkg.sha512",
+        "nonfactors.grid.core.mvc6.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.12": {
       "sha512": "mAgscpQMLw5/nfA1Q5oJVAT29yROUo1ifZGbbTpx/lwZpSxMUGoYbKfmvdm8oXER+RzxqBmmQzeBEVKfeHv2nw==",
       "type": "package",
@@ -642,6 +723,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "CoreAdmin >= 4.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.11",
       "Microsoft.EntityFrameworkCore.Sqlite >= 10.0.11",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.24.1-preview.1"
@@ -699,6 +781,10 @@
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
+          "CoreAdmin": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[10.0.11, )"
