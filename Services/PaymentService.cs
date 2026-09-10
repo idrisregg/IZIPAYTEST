@@ -46,12 +46,13 @@ public sealed class PaymentService(
     }
 
     public async Task<bool> UpdatePaymentByCheckoutIdAsync(
+        string provider,
         string checkoutId,
         string status,
         CancellationToken cancellationToken)
     {
         var payment = await db.Payments.FirstOrDefaultAsync(
-            item => item.CheckoutId == checkoutId && item.Provider == "chargily",
+            item => item.CheckoutId == checkoutId && item.Provider == provider,
             cancellationToken);
 
         if (payment is null)

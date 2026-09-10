@@ -93,18 +93,20 @@ public sealed class ChargilyController(IPaymentService paymentService, IConfigur
 
         var checkoutStatus = ReadString(checkout, "status");
 
-        string stat = "";
+        var stat = eventType switch
+        {
+            "checkout.paid" when string.Equals(checkoutStatus, "paid", StringComparison.OrdinalIgnoreCase) => "Paid",
+            "checkout.failed" when string.Equals(checkoutStatus, "failed", StringComparison.OrdinalIgnoreCase) => "Failed",
+            _ => null
+        };
 
-        if (eventType == "checkout.paid" && checkoutStatus == "paid")
+        if (stat is null)
         {
-            stat = "Paid";
-        }
-        if (eventType == "checkout.failed" && checkoutStatus == "failed")
-        {
-            stat = "Failed";
+            return BadRequest(new { message = "Chargily webhook status is invalid." });
         }
 
         var updated = await _paymentService.UpdatePaymentByCheckoutIdAsync(
+            "chargily",
             checkoutId,
             stat,
             cancellationToken);
@@ -115,6 +117,22 @@ public sealed class ChargilyController(IPaymentService paymentService, IConfigur
         }
 
         return Ok();
+    }
+
+    [HttpGet("callback")]
+    public async Task<IActionResult> Callback(
+        [FromQuery(Name = "checkout_id")] string? checkoutId,
+        [FromQuery] string? status,
+        CancellationToken cancellationToken)
+    {
+        if (string.Equals(status, "paid", StringComparison.OrdinalIgnoreCase) &&
+            !string.IsNullOrWhiteSpace(checkoutId))
+        {
+            await _paymentService.UpdatePaymentByCheckoutIdAsync(
+                "chargily", checkoutId, "Paid", cancellationToken);
+        }
+
+        return Redirect("/");
     }
 
 

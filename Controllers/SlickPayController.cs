@@ -60,4 +60,26 @@ public sealed class SlickPayController(IPaymentService paymentService) : Control
         }
     }
 
+    [HttpGet("callback")]
+    public async Task<IActionResult> Callback(
+        [FromQuery(Name = "invoice_id")] string? invoiceId,
+        [FromQuery] string? status,
+        CancellationToken cancellationToken)
+    {
+        var normalizedStatus = status?.ToLowerInvariant() switch
+        {
+            "paid" or "success" or "successful" => "Paid",
+            "failed" or "failure" or "cancelled" or "canceled" => "Failed",
+            _ => null
+        };
+
+        if (!string.IsNullOrWhiteSpace(invoiceId) && normalizedStatus is not null)
+        {
+            await _paymentService.UpdatePaymentByCheckoutIdAsync(
+                "slickpay", invoiceId, normalizedStatus, cancellationToken);
+        }
+
+        return Redirect("/");
+    }
+
 }
